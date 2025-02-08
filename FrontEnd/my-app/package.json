@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Rishik72.github.io/ChargeFlex-Recharge-System",
   "dependencies": {
     "antd": "^5.23.3",
     "axios": "^1.7.9",
@@ -21,7 +22,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   },
   "eslintConfig": {
     "extends": [
