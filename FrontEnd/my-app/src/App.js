@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './NavBar';
@@ -15,11 +14,11 @@ import './App.css';
 function App() {
   return (
     <div>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Navbar />
         <Routes>
           <Route path="/customer-dashboard" element={<CustomerDashboard />} />
-          <Route path="/about" element={<About/>}/>
+          <Route path="/about" element={<About />} />
           <Route path="/recharge-plans" element={<RechargePlans />} />
           <Route path="/payment-gateway" element={<PaymentGateway />} />
           <Route path="/home" element={<Home />} />
@@ -34,4 +33,3 @@ function App() {
 }
 
 export default App;
-/**/
