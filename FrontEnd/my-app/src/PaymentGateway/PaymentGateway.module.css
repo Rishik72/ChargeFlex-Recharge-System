@@ -1,0 +1,154 @@
+:root {
+  --primary-bg: #000;
+  --secondary-bg: #444;
+  --primary-color: #fff;
+  --accent-color: red;
+  --accent-color-dark: darkred;
+  --input-bg: #222;
+  --border-radius: 10px;
+  --transition: 0.3s ease;
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.5);
+}
+
+/* Main container for the Payment Gateway page */
+.paymentGateway {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Container for form and back button */
+.container {
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 4px 15px var(--shadow-light);
+  border-radius: var(--border-radius);
+}
+
+/* Back button styling */
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  color: #bbb;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: color var(--transition);
+}
+
+.backButton:hover {
+  color: var(--primary-color);
+}
+
+/* Payment form card styling */
+.paymentForm {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 10px var(--shadow-medium);
+}
+
+/* Title container styling */
+.titleContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* Title text styling */
+.title {
+  font-size: 28px;
+  margin-left: 12px;
+  color: var(--accent-color);
+}
+
+/* Input group styling */
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* Input field styling */
+.inputGroup input {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--input-bg);
+  border: 1px solid #555;
+  border-radius: 5px;
+  color: var(--primary-color);
+  font-size: 16px;
+  outline: none;
+  transition: border var(--transition);
+}
+
+.inputGroup input:focus {
+  border-color: var(--accent-color);
+}
+
+/* Grid styling for expiry and CVV inputs */
+.inputGroupGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Submit button styling */
+.submitButton {
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-color-dark));
+  color: var(--primary-color);
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background var(--transition);
+}
+
+.submitButton:hover {
+  background: var(--accent-color-dark);
+}
+
+/* Success message styling */
+.successMessage {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Success icon styling */
+.successIcon {
+  font-size: 60px;
+  color: green;
+  margin-bottom: 10px;
+}
+
+/* Error message styling */
+.error {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+  .inputGroupGrid {
+    grid-template-columns: 1fr;
+  }
+}

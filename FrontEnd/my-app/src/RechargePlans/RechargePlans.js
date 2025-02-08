@@ -31,7 +31,7 @@ const RechargePlans = () => {
 
   const handleRecharge = (amount, validity) => {
     if (window.confirm(`Proceed to payment?\n\nPlan Amount: ₹ ${amount}\nValidity: ${validity} days`)) {
-      navigate('/payment-gateway');
+      navigate('/payment-gateway', { state: { amount, validity } });
     }
   };
 

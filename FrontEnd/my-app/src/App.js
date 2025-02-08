@@ -8,6 +8,7 @@ import Login from './Login/Login.js';
 import CustomerDashboard from './CustomerDashboard/CustomerDashboard.js';
 import RechargePlans from './RechargePlans/RechargePlans.js';
 import AdminDashboard from './AdminDashboard/AdminDashboard.js';
+import PaymentGateway from './PaymentGateway/PaymentGateway.module.js';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/customer-dashboard" element={<CustomerDashboard />} />
           <Route path="/recharge-plans" element={<RechargePlans />} />
+          <Route path="/payment-gateway" element={<PaymentGateway />} />
           <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
