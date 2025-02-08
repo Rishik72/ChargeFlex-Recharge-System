@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Particles from "react-tsparticles";
+
 import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import AuthService from "../AuthService.js";
 import StorageService from "../Storage.js";
 import AuthBackgroundImage from '../assets/auth-bckground-img.png';
 import './Login.css'
-import { loadFull } from 'tsparticles';
+
 
 
 const Login = () => {
@@ -59,21 +59,6 @@ const Login = () => {
       };
 
 
-  const particlesOptions = {
-    particles: {
-      number: { value: 100 },
-      color: { value: '#00FF00' },
-      links: { enable: true, distance: 150, color: '#ffffff' },
-      shape: { type: 'polygon', polygon: { nb_sides: 3 } },
-      opacity: { value: 0.8 },
-      size: { value: { min: 3, max: 5 } },
-      move: { enable: true, speed: 3 },
-    },
-  };
-    const particlesInit = async (engine) => {
-      await loadFull(engine);
-    };
-
 
 
 
@@ -83,7 +68,7 @@ const Login = () => {
     <>
       
       <div className="main">
-      <Particles id="tsparticles" init={particlesInit} options={particlesOptions} />
+   
         <div className="container">
           <div className="left-div">
             <img src={AuthBackgroundImage} className="background-img" alt="Background" />

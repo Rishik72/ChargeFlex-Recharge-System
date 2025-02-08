@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CreditCard, CheckCircle, ArrowLeft } from 'lucide-react';
+import AuthService from '../AuthService';
+import StorageService from '../Storage.js';
 import styles from './PaymentGateway.module.css'; // Ensure your file is named PaymentGateway.module.css
 
 const PaymentGateway = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
@@ -13,33 +16,26 @@ const PaymentGateway = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+  const { amount, validity } = location.state || { amount: 0, validity: 0 };
 
-  // Formats card number into groups of 4 digits separated by a space
   const formatCardNumber = (value) =>
     value.replace(/\D/g, '').replace(/(\d{4})/g, '$1 ').trim();
 
-  // Formats expiry date to MM/YY (basic formatting)
   const formatExpiryDate = (value) =>
     value.replace(/[^0-9]/g, '').replace(/^(\d{2})/, '$1/');
 
-  // Validate all fields
   const validateForm = () => {
     let errors = {};
-
-    // Check for a non-empty name
     if (!name.trim()) {
       errors.name = "Card holder name is required.";
     }
-    // Validate card number: ensure 16 digits after removing spaces
     const digits = cardNumber.replace(/\s+/g, '');
     if (digits.length !== 16) {
       errors.cardNumber = "Card number must be 16 digits.";
     }
-    // Validate expiry date: Must be in MM/YY format
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) {
       errors.expiryDate = "Expiry date must be in MM/YY format.";
     }
-    // Validate CVV: Must be exactly 3 digits
     if (!/^\d{3}$/.test(cvv)) {
       errors.cvv = "CVV must be 3 digits.";
     }
@@ -53,15 +49,26 @@ const PaymentGateway = () => {
       setErrors(errorsFound);
       return;
     }
+
     setErrors({});
     setIsProcessing(true);
 
-    // Simulate a payment process delay
-    setTimeout(() => {
+    const currentDate = new Date();
+    const futureDate = new Date(currentDate.getTime() + validity * 24 * 60 * 60 * 1000);
+
+    const record = {
+      id: StorageService.getUserId(),
+      name: StorageService.getUserName(),
+      plan: amount,
+      validity: futureDate.toLocaleDateString('en-GB'),
+      date: currentDate.toLocaleDateString('en-GB'),
+      email: StorageService.getUserEmail()
+    };
+
+    AuthService.saveRecord(record).then(() => {
       setIsProcessing(false);
       setIsSuccess(true);
-      // Removed navigation: the page will now remain on the success message.
-    }, 2000);
+    });
   };
 
   return (
@@ -87,7 +94,10 @@ const PaymentGateway = () => {
             <div className={styles.successMessage}>
               <CheckCircle className={styles.successIcon} />
               <h2>Payment Successful!</h2>
-              <p>Your payment has been processed successfully.</p>
+              <p>Your payment of ₹{amount} has been processed successfully.</p>
+              <p>Validity: {validity} days</p>
+              <p>Expires on: {new Date(new Date().getTime() + validity * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB')}</p>
+              <button className={styles.submitButton} onClick={() => navigate('/customer-dashboard')}>Go to Dashboard</button>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>

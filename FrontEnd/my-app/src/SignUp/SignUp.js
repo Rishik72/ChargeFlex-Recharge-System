@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Form, Button, message } from 'antd';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
+
+
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../AuthService.js';
 import './SignUp.css';
@@ -11,22 +11,6 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Function to initialize particles
-  const particlesInit = async (engine) => {
-    await loadFull(engine);
-  };
-
-  const particlesOptions = {
-    particles: {
-      number: { value: 100 },
-      color: { value: '#00FF00' },
-      links: { enable: true, distance: 150, color: '#ffffff' },
-      shape: { type: 'polygon', polygon: { nb_sides: 3 } },
-      opacity: { value: 0.8 },
-      size: { value: { min: 3, max: 5 } },
-      move: { enable: true, speed: 3 },
-    },
-  };
 
   // Handle form submission
   const handleSubmit = async (values) => {
@@ -50,7 +34,6 @@ const Signup = () => {
 
   return (
     <div className="main" >
-      <Particles id="tsparticles" init={particlesInit} options={particlesOptions} />
 
       <div className="containerS">
         <div className="left-div">
